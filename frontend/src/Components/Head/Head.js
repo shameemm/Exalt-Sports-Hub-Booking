@@ -12,7 +12,7 @@ function Head() {
             </div>
             <div className="links">
                 <Link className='link' to="/"><p>Home</p></Link>
-                <Link className='link' to="/explore"><p>Explore</p></Link>
+                <Link className='link' to="/login"><p>Login</p></Link>
                 <Link className='link' to="/contact"><p>Contact</p></Link>
             </div>
         </div>
