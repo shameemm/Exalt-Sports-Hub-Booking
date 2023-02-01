@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Grid from '@mui/material/Grid';
 
 import Head from '../Components/Head/Head'
 import UserLogin from '../Components/UserLogin/UserLogin'
@@ -12,11 +13,14 @@ function Login() {
         {/* <div className="login"> */}
         <Grid container spacing={1}>
           <Grid md={6} xs={12}>
+            <div className="login-form-part">
             <UserLogin></UserLogin>
+            </div>
+           
           </Grid>
           
           <Grid md={6} xs={12} >
-            <UserLogin></UserLogin>
+            <img src={"/images/gif/login.gif"} alt="" />
           </Grid>
         </Grid>
           

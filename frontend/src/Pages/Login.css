@@ -1,9 +1,8 @@
-.login{
-    display: flex;
-    /* flex-direction: column;
-    justify-content: space-between;
-    height: 50%;
-    width: 100%;
-    padding: 1rem; */
-    
+.login-form-part{
+    margin: 3rem;
+    border-radius: 1.5rem;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
 }
