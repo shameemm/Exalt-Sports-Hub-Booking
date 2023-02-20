@@ -1,17 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
-import axios from 'axios'
+import axios from '../../axios'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { UserContext } from '../../Context/UserContext';
 
 
 function UserLogin() {
     
-    const [username,setUsername] = useState('')
+    const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    useEffect(()=>{
+    const [refresh,setRefresh] = useState('')
+    const [access,setAccess] = useState('')
+    const [error,setError] = useState('')
+    const user = useContext(UserContext.user)
+    console.log(user);
+    const login = async (e)=>{
+        e.preventDefault();
+        const data = {
+            email:email,
+            password:password,
+        }
+            await axios.post('accounts/api/login/',data).then((res)=>{
+                console.log(res.data.refresh)
+                window.localStorage.setItem("access", res.data.access)
+                window.localStorage.setItem("refresh", res.data.refresh)
+
+            }).catch((err)=>{
+                console.log(err)
+            })
         
-    },[])
+    }
     
   return (
     <div>
@@ -21,8 +40,8 @@ function UserLogin() {
                 <p className="dont-have-account">Don't have an account? <u>Sign Up</u></p>
             </div>
             <div className="user-login-form">
-                <form action="">
-                    <input type="text" value={username} onChange={(e)=>{setUsername(e.target.value)}} placeholder='Username' />
+                <form action="" >
+                    <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='email' />
                     <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
                     <div className="user-login-button">
                         <div className="or-signin">
@@ -30,7 +49,7 @@ function UserLogin() {
                              <img src="/icons/facebook.png" alt="" />
                              <img src="/icons/google.png" alt="" />
                         </div>
-                        <button type="submit"> Login </button>
+                        <button onClick={login}> Login </button>
                     </div>
                 </form>
             </div>

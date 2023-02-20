@@ -7,7 +7,10 @@ from rest_framework.response import Response
 # view for registering users
 class RegisterView(APIView):
     def post(self, request):
+        print("1111")
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        print("qqqq")
         serializer.save()
+        
         return Response(serializer.data)
