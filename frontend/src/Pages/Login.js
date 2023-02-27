@@ -11,7 +11,7 @@ function Login() {
     <div>
         <Head></Head>
         {/* <div className="login"> */}
-        <Grid container spacing={1}>
+        <Grid container spacing={3}>
           <Grid md={6} xs={12}>
             <div className="login-form-part">
             <UserLogin></UserLogin>
@@ -20,7 +20,7 @@ function Login() {
           </Grid>
           
           <Grid md={6} xs={12} >
-            <img src={"/images/gif/login.gif"} alt="" />
+            <img class = "login-gif"src={"/images/gif/login.gif"} alt="" />
           </Grid>
         </Grid>
           

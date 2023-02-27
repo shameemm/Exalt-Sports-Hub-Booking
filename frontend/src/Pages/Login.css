@@ -6,3 +6,8 @@
     -ms-border-radius: 1.5rem;
     -o-border-radius: 1.5rem;
 }
+
+.login-gif{
+    height: 62vh;
+    margin: 2rem;
+}

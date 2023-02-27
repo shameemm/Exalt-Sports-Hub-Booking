@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
+import {Link} from 'react-router-dom'
 import axios from '../../axios'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -13,22 +14,24 @@ function UserLogin() {
     const [refresh,setRefresh] = useState('')
     const [access,setAccess] = useState('')
     const [error,setError] = useState('')
-    const user = useContext(UserContext.user)
+    const user = ""
+    // useContext(UserContext.user)
     console.log(user);
     const login = async (e)=>{
-        e.preventDefault();
-        const data = {
-            email:email,
-            password:password,
-        }
-            await axios.post('accounts/api/login/',data).then((res)=>{
-                console.log(res.data.refresh)
-                window.localStorage.setItem("access", res.data.access)
-                window.localStorage.setItem("refresh", res.data.refresh)
+        // e.preventDefault();
+        // const data = {
+        //     email:email,
+        //     password:password,
+        // }
+        //     await axios.post('accounts/api/login/',data).then((res)=>{
+        //         console.log(res.data.refresh)
+        //         window.localStorage.setItem("access", res.data.access)
+        //         window.localStorage.setItem("refresh", res.data.refresh)
 
-            }).catch((err)=>{
-                console.log(err)
-            })
+        //     }).catch((err)=>{
+        //         console.log(err)
+                
+        //     })
         
     }
     
@@ -37,7 +40,7 @@ function UserLogin() {
         <div className="container">
             <div className="user-login-title">
                 <p>Login as User</p>
-                <p className="dont-have-account">Don't have an account? <u>Sign Up</u></p>
+                <p className="dont-have-account">Don't have an account?<Link className='link-register' to="/register"><p>Sign-Up</p></Link></p>
             </div>
             <div className="user-login-form">
                 <form action="" >
