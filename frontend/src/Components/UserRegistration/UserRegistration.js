@@ -30,10 +30,7 @@ function UserRegistration() {
         }
       })
     }
-  }
-  
-
-        
+  }       
   return (
     <div>
       <div className="register-head-card">
