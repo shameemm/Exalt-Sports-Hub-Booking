@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Banner.css'
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { purple } from '@mui/material/colors';
 import { Link } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
+import { UserContext } from '../../Context/UserContext';
 
 
 
@@ -19,6 +21,10 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function Banner() {
+  const {token} = useContext(UserContext)
+  console.log(token);
+  const decoded = jwt_decode(token)
+  console.log(decoded.user);
   return (
     <div>
       <div className="banner">

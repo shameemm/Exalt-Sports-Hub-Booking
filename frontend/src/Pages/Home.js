@@ -6,22 +6,7 @@ import SearchBook from '../Components/SearchBook/SearchBook'
 import axios from 'axios'
 
 function Home() {
-    const [user,setUser] = useState([])
-    const [phone,setPhone] = useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api/user/')
-        .then(res => {
-        setUser(res.data)
-    })
-    },[])
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api/phone/')
-        .then(res => {
-        setPhone(res.data)
-    })
-    },[])
-    console.log(user);
-    console.log(phone);
+    
     
     
   return (

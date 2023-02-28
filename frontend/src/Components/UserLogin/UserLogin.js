@@ -28,13 +28,13 @@ function UserLogin() {
         await axios.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
                 console.log(res.data);
-                // localStorage.setItem('refresh',res.data.refresh)
-                // localStorage.setItem('access',res.data.access)
-                // localStorage.setItem('user',res.data.user)
-                // setRefresh(res.data.refresh)
-                // setAccess(res.data.access)
-                // setError(res.data.error)
-                // console.log(refresh,access);
+                localStorage.setItem('refresh',res.data.refresh)
+                localStorage.setItem('access',res.data.access)
+                localStorage.setItem('user',res.data.user)
+                setRefresh(res.data.refresh)
+                setAccess(res.data.access)
+                setError(res.data.error)
+                console.log(refresh,access);
             }
         })
     }
