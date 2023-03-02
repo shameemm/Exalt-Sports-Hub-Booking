@@ -2,8 +2,8 @@ import React from 'react'
 
 import Grid from '@mui/material/Grid';
 
-import Head from '../Components/Head/Head'
-import UserLogin from '../Components/UserLogin/UserLogin'
+import Head from '../../Components/Head/Head'
+import UserLogin from '../../Components/UserLogin/UserLogin'
 import './Login.css'
 
 function Login() {

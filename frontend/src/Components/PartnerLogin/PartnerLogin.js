@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react'
+import './PartnerLogin.css'
 
 
 function PartnerLogin() {
@@ -8,11 +9,11 @@ function PartnerLogin() {
         
     },[])
   return (
-    <div>
+    <div className='partner-login-container'>
         <div className="container">
             <div className="user-login-title">
-                <p>Login as User</p>
-                <p className="dont-have-account">Don't have an account? <u>Sign Up</u></p>
+                <p>Login as Partner</p>
+                <p className="dont-have-account">Connect your hub with us..<u> Register</u></p>
             </div>
             <div className="user-login-form">
                 <form action="">
@@ -28,9 +29,9 @@ function PartnerLogin() {
                     </div>
                 </form>
             </div>
-            <div className="login-with-phone">
+            {/* <div className="login-with-phone">
                 <p>Or <u>Login with Phone</u></p>
-            </div>
+            </div> */}
         </div>
     </div>
   )
