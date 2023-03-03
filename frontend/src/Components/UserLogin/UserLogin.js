@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
 import {Link} from 'react-router-dom'
 import axios from '../../axios'
+import jwt_decode from "jwt-decode";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { UserContext } from '../../Context/UserContext';
@@ -15,9 +16,9 @@ function UserLogin() {
     const [refresh,setRefresh] = useState('')
     const [access,setAccess] = useState('')
     const [error,setError] = useState('')
-    const user = ""
+    
     // useContext(UserContext.user)
-    console.log(user);
+    // console.log(user);
     const login = async (e)=>{
         e.preventDefault()
         const data = {
@@ -27,14 +28,21 @@ function UserLogin() {
         console.log(data);
         await axios.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
-                console.log(res.data);
-                localStorage.setItem('refresh',res.data.refresh)
-                localStorage.setItem('access',res.data.access)
-                localStorage.setItem('user',res.data.user)
-                setRefresh(res.data.refresh)
-                setAccess(res.data.access)
-                setError(res.data.error)
-                console.log(refresh,access);
+                const code = jwt_decode(res.data.refresh)
+                console.log(code.is_partner);
+                if (code.is_partner ==false){
+                    localStorage.setItem('refresh',res.data.refresh)
+                    localStorage.setItem('access',res.data.access)
+                    localStorage.setItem('user',res.data.user)
+                    setRefresh(res.data.refresh)
+                    setAccess(res.data.access)
+                    setError(res.data.error)
+                }
+                else{
+                    alert('You are not a user')
+                }
+                
+                
             }
         })
     }

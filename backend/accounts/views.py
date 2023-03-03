@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import UserSerializer,MyTokenObtainPairSerializer
+from .serializers import UserSerializer,MyTokenObtainPairSerializer,MyAdminTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -18,3 +18,6 @@ class RegisterView(APIView):
     
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+    
+class MyAdminTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyAdminTokenObtainPairSerializer

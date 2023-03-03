@@ -8,6 +8,7 @@ import Home from './Pages/User/Home';
 import {UserProvider} from './Context/UserContext'
 import Registration from './Pages/User/Registration';
 import PartnerRegPage from './Pages/Partner/PartnerRegPage';
+import AdminLoginPage from './Pages/Admin/AdminLoginPage';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <UserProvider>
       <Routes>
         <Route path='' element={<Home/>} />
-        <Route path='*' element={<h1>404 Not Found</h1>} />
+        <Route path='*' element={<h1>404 Not Found</h1>}/>
+        <Route path='/admin' element={<AdminLoginPage/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/partner_login' element ={<PartnerLoginpage/>}></Route>
         <Route path='/partner-reg' element = {<PartnerRegPage/>}></Route>

@@ -27,7 +27,7 @@ function PartnerRegistration() {
       await axios.post('accounts/api/register/',data).then((res)=>{
         if (res.status===200){
           console.log(res)
-          navigate('/login')
+          navigate('/partner_login')
         }
       })
     }
