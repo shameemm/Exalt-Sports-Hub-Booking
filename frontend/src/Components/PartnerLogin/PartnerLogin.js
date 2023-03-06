@@ -1,10 +1,13 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect,useContext} from 'react'
 import jwt_decode from 'jwt-decode'
 import axios from '../../axios'
 import './PartnerLogin.css'
+import { UserContext } from '../../Context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 
 function PartnerLogin() {
+    const navigate = useNavigate()
     let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
     let mailError = "Enter valid E-mail address"
     const [email,setEmail] = useState('')
@@ -12,6 +15,13 @@ function PartnerLogin() {
     const [refresh,setRefresh] = useState('')
     const [access,setAccess] = useState('')
     const [error,setError] = useState('')
+    const {token,setTokens}=useContext(UserContext)
+    useEffect(()=>{
+        const token = localStorage.getItem('refresh')
+        if (token){
+            navigate("/partner-home")
+        }
+    },[navigate])
     // useContext(UserContext.user)
     // console.log(user);
     const login = async (e)=>{
@@ -26,13 +36,15 @@ function PartnerLogin() {
                 console.log(res.data);
                 const code = jwt_decode(res.data.refresh)
                 console.log(code.is_partner);
-                if (code.is_partner == true){
+                if (code.is_partner === true){
                     localStorage.setItem('refresh',res.data.refresh)
                     localStorage.setItem('access',res.data.access)
                     localStorage.setItem('user',res.data.user)
                     setRefresh(res.data.refresh)
                     setAccess(res.data.access)
                     setError(res.data.error)
+                    setTokens(res.data.refresh)
+                    navigate('/partner-home')
                 }
                 else{
                     alert('You are not a partner')
@@ -51,8 +63,10 @@ function PartnerLogin() {
             </div>
             <div className="user-login-form">
                 <form action="" onSubmit={login}>
-                    <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Username' />
-                    <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
+                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Username' />
+                    <span>{mailError}</span>
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
+                    <span>{passError}</span>
                     <div className="user-login-button">
                         <div className="or-signin">
                             <p>Or Login with - </p>

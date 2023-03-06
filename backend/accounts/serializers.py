@@ -5,8 +5,6 @@ from datetime import timedelta, datetime
 from django.utils import timezone
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-
-
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
@@ -29,7 +27,7 @@ class MyAdminTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['iat'] = datetime.now()
         token['user'] = user.name
         token['email'] = user.email
-        token['is_admin'] = user.is_admin
+        token['is_superuser'] = user.is_superuser
         token['date'] = str(datetime.now())
 
         return token

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate,useHistory} from 'react-router-dom'
 import axios from '../../axios'
 import jwt_decode from "jwt-decode";
 import Box from '@mui/material/Box';
@@ -9,6 +9,8 @@ import { UserContext } from '../../Context/UserContext';
 
 
 function UserLogin() {
+    const navigate = useNavigate()
+    
     let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
     let mailError = "Enter valid E-mail address"
     const [email,setEmail] = useState('')
@@ -16,33 +18,42 @@ function UserLogin() {
     const [refresh,setRefresh] = useState('')
     const [access,setAccess] = useState('')
     const [error,setError] = useState('')
-    
-    // useContext(UserContext.user)
-    // console.log(user);
+    const {token,setTokens}=useContext(UserContext)
+    useEffect(()=>{
+        const token = localStorage.getItem('refresh')
+        if (token){
+            navigate("/")
+        }
+    },[navigate])
+    console.log("tokens",token);
     const login = async (e)=>{
         e.preventDefault()
         const data = {
             email:email,
             password:password
         }
-        console.log(data);
+        console.log(data)
+        
         await axios.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
                 const code = jwt_decode(res.data.refresh)
                 console.log(code.is_partner);
-                if (code.is_partner ==false){
+                if (code.is_partner === false){
                     localStorage.setItem('refresh',res.data.refresh)
                     localStorage.setItem('access',res.data.access)
                     localStorage.setItem('user',res.data.user)
                     setRefresh(res.data.refresh)
                     setAccess(res.data.access)
                     setError(res.data.error)
+                    setTokens(res.data.refresh)
+                    navigate('/')
                 }
                 else{
                     alert('You are not a user')
-                }
-                
-                
+                }  
+            }
+            else {
+                alert("Invalid Username And Password")
             }
         })
     }

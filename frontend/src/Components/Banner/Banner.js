@@ -22,9 +22,11 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 function Banner() {
   const {token} = useContext(UserContext)
-  console.log(token);
-  const decoded = jwt_decode(token)
-  console.log(decoded.user);
+  if(token!=null){
+    console.log(token);
+    const decoded = jwt_decode(token)
+    console.log(decoded.user);
+  }
   return (
     <div>
       <div className="banner">

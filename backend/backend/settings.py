@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -96,7 +98,7 @@ CORS_ORIGIN_WHITELIST = [
 SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': True,
-    'JWT_PAYLOAD_HANDLER': 'path.to.your.jwt_payload_handler',
+    
 }
 
 # Password validation

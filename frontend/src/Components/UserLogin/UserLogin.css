@@ -19,6 +19,16 @@
     height: 1.5rem;
 }
 
+.user-login-form span{
+    font-size: 12px;
+    padding: 3px;
+    color:red;
+    display:none
+}
+ input:invalid ~ span{
+    /* border: 1px solid red; */
+    display: block;
+} 
 .user-login-form{
     display: flex;
     flex-direction: column;
