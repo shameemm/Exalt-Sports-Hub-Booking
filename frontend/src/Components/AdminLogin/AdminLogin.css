@@ -44,3 +44,14 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+.admin-login-form span{
+    font-size: 12px;
+    padding: 3px;
+    color:red;
+    display:none
+}
+ input:invalid ~ span{
+    /* border: 1px solid red; */
+    display: block;
+} 

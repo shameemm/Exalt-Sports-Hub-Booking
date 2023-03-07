@@ -33,7 +33,7 @@ function UserLogin() {
             password:password
         }
         console.log(data)
-        
+        if (email.length != 0 && password.length !=0){
         await axios.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
                 const code = jwt_decode(res.data.refresh)
@@ -55,7 +55,10 @@ function UserLogin() {
             else {
                 alert("Invalid Username And Password")
             }
-        })
+        })}
+        else{
+            alert("Enter the valid Username And Password")
+        }
     }
     
   return (

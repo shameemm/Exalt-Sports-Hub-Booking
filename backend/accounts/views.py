@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from rest_framework.views import APIView
 from .serializers import UserSerializer,MyTokenObtainPairSerializer,MyAdminTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-
 
 # view for registering users
 class RegisterView(APIView):

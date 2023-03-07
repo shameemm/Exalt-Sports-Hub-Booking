@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'allauth',
+    'allauth.account',
     
     
 ]
@@ -75,6 +77,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'APP': {
+            'client_id': '892466016773-cf1ccscpnij2q9bes9684vb1erd186ov.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
 
 
 # Database

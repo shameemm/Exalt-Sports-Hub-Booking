@@ -24,13 +24,14 @@ function PartnerLogin() {
     },[navigate])
     // useContext(UserContext.user)
     // console.log(user);
-    const login = async (e)=>{
+    const loginPartner = async (e)=>{
         e.preventDefault()
         const data = {
             email:email,
             password:password
         }
         console.log(data);
+        if (email.length!=0 && password.length!=0){
         await axios.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
                 console.log(res.data);
@@ -49,10 +50,17 @@ function PartnerLogin() {
                 else{
                     alert('You are not a partner')
                 }
-                
-                
             }
-        })
+            else if(res.status===401){
+                alert("Enter the valid username and password")
+            }
+            else{
+                alert("Something went wrong")
+            }
+        })}
+        else{
+            alert("Enter username and password")
+        }
     }
   return (
     <div className='partner-login-container'>
@@ -62,7 +70,7 @@ function PartnerLogin() {
                 <p className="dont-have-account">Connect your hub with us..<u> Register</u></p>
             </div>
             <div className="user-login-form">
-                <form action="" onSubmit={login}>
+                <form action="" onSubmit={loginPartner}>
                     <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Username' />
                     <span>{mailError}</span>
                     <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />

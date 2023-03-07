@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../Context/UserContext'
 
 function AdminLogin() {
+    let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+    let mailError = "Enter valid E-mail address"
     const navigate = useNavigate()
     const {token,setTokens}=useContext(UserContext)
     useEffect(()=>{
@@ -54,8 +56,10 @@ function AdminLogin() {
             </div>
             <div className="admin-login-card-body">
                 <form className='admin-login-form' action="" onSubmit={login}>
-                    <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} name="email" id="" placeholder='Email'/>
-                    <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} name="password" id="" placeholder='Password' />
+                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" value={email} onChange={(e)=>{setEmail(e.target.value)}} name="email" id="" placeholder='Email'/>
+                    <span>{mailError}</span>
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={(e)=>{setPassword(e.target.value)}} name="password" id="" placeholder='Password' />
+                    <span>{passError}</span>
                     <input type="submit" value="Login" />
                 </form>
             </div>

@@ -1,15 +1,20 @@
 import React, { useContext } from 'react'
 import './Head.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../Context/UserContext'
 
 
 function Head() {
+  const navigate = useNavigate()
+  console.log(window.location.pathname)
   const {token,setTokens}=useContext(UserContext)
   {token?console.log("head",token):console.log("Null")}
   const logout = ()=>{
     localStorage.clear()
     setTokens(null)
+    if (window.location.pathname==='/partner-home'){
+      navigate('/partner_login')
+    }
   }
   return (
     <div>
