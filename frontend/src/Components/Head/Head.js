@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../Context/UserContext'
 
 
+
 function Head() {
   const navigate = useNavigate()
   console.log(window.location.pathname)
@@ -22,12 +23,13 @@ function Head() {
             <div className="logo">
                 <img src="/Logo/logo-trans.png" alt="logo" />
             </div>
+              {window.location.pathname==='/admin'?<div></div>:
             <div className="links">
             <p><Link className='link-head' to="/">Home</Link></p>
             <p><Link className='link-head' to="/partner_login">Partner</Link></p>
                 {token?<span><p onClick={logout}>Logout</p></span>:<span><p><Link className='link-head' to="/login">Login</Link></p></span>}
                 <p><Link className='link-head' to="/contact">Contact</Link></p>
-            </div>
+            </div>}
         </div>
     </div>
   )

@@ -4,6 +4,7 @@ import axios from '../../axios'
 import './UserRegistration.css'
 
 function UserRegistration() {
+  
   const navigate = useNavigate()
   const [name,setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -21,6 +22,7 @@ function UserRegistration() {
   let phoneError = "Enter valid phone number"
   let mailError = "Enter valid E-mail address"
   const register = async (e)=>{
+    e.preventDefault()
     if (name.length!==0 &&phone.length!==0&&email.length!==0&&password.length!==0){
       e.preventDefault()
       console.log(data)
@@ -30,6 +32,9 @@ function UserRegistration() {
           navigate('/login')
         }
       })
+    }
+    else{
+      alert("Please fill the fields")
     }
   }       
   return (

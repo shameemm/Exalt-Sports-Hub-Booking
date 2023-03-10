@@ -31,6 +31,9 @@ function PartnerRegistration() {
         }
       })
     }
+    else{
+      alert("Please fill the fields")
+    }
   }
   
   return (

@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
-import {Link, useNavigate,useHistory} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from '../../axios'
 import jwt_decode from "jwt-decode";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { UserContext } from '../../Context/UserContext';
 
 
 function UserLogin() {
+    
     const navigate = useNavigate()
     
     let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -77,8 +76,8 @@ function UserLogin() {
                     <div className="user-login-button">
                         <div className="or-signin">
                             <p>Or Login with - </p>
-                             <img src="/icons/facebook.png" alt="" />
-                             <img src="/icons/google.png" alt="" />
+                             <img  src="/icons/facebook.png" alt="" />
+                             <img  src="/icons/google.png" alt="" />
                         </div>
                         <button onClick={login}> Login </button>
                     </div>
