@@ -12,6 +12,7 @@ import AdminLoginPage from './Pages/Admin/AdminLoginPage';
 import PartnerHome from './Pages/Partner/PartnerHome';
 import { useContext } from 'react';
 import AdminHome from './Pages/Admin/AdminHome';
+import ChatPage from './Pages/User/ChatPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/partner-reg' element = {<PartnerRegPage/>}></Route>
         <Route path='/partner-home' element = {<PartnerHome/>}/>
         <Route path='/register' element={<Registration/>}/>
+        <Route path='/chat' element={<ChatPage/>}></Route>
         <Route path='*' element={<h1>404 Not Found</h1>}/>
       </Routes>
       </UserProvider>

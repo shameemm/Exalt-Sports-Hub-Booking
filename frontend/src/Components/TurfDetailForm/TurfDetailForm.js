@@ -52,6 +52,8 @@ function TurfDetailForm() {
         <input type = "file" accept="image/png, image/gif, image/jpeg" onChange={handleFileSelect}/>
         <img className='prev-image' src={previewUrl}alt="" srcset="" width="150" height="150"/>
         <br />
+        <br />
+        <h5>Availible Courts</h5>
         <FormControlLabel control={<Checkbox onChange={(event)=>{setFives(event.target.checked)}} />} label="5's Football" />
         <FormControlLabel control={<Checkbox onChange={(e)=>{setSevens(e.target.checked)}}/>} label="7's Football" />
         <FormControlLabel control={<Checkbox onChange={(e)=>{setElevens(e.target.checked)}} />} label="11's Football" />
