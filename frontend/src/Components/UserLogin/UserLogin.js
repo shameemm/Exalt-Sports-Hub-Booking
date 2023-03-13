@@ -11,7 +11,7 @@ function UserLogin() {
     
     const navigate = useNavigate()
     
-    let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+    let passError = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
     let mailError = "Enter valid E-mail address"
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
