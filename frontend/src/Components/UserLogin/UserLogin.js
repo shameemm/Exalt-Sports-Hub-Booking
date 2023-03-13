@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import axios from '../../axios'
 import jwt_decode from "jwt-decode";
 import { UserContext } from '../../Context/UserContext';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 function UserLogin() {
@@ -65,6 +66,7 @@ function UserLogin() {
         <div className="container">
             <div className="user-login-title">
                 <p>Login as User</p>
+                
                 <p className="dont-have-account">Don't have an account? <Link className='link-register' to="/register"><p>Sign-Up</p></Link></p>
             </div>
             <div className="user-login-form">

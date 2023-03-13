@@ -23,7 +23,6 @@ class MyAdminTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        # Add custom claims
         token['iat'] = datetime.now()
         token['user'] = user.name
         token['email'] = user.email
@@ -39,7 +38,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "name", "password","phone","is_partner"]
 
     def create(self, validated_data):
-        print("qwww")
         user = UserData.objects.create(email=validated_data['email'],
                                        name=validated_data['name'],
                                        phone=validated_data['phone'],
