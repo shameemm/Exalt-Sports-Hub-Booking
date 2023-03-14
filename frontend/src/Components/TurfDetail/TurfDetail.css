@@ -1,0 +1,9 @@
+.turf-detail{
+    margin: 3rem;
+}
+
+.turf-detail-card{
+    background-color: aqua;
+    display: flex;
+    padding: 3rem;
+}

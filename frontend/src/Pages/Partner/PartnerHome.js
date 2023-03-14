@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import Grid from '@mui/material/Grid'
+import TurfDetails from '../../Components/TurfDetail/TurfDetails'
 import TurfDetailForm from '../../Components/TurfDetailForm/TurfDetailForm'
 
 const style = {
@@ -54,6 +55,7 @@ else{
         </Grid>
       </Modal>
         
+        <TurfDetails></TurfDetails>
     </div>
   )
 }
