@@ -11,7 +11,7 @@ import './TurfDetailForm.css'
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-function TurfDetailForm() {
+function TurfDetailForm({handleClose}) {
     const navigate = useNavigate()
     const [image, setImage] = useState(null)
     const [place, setPlace] = useState('')
@@ -36,7 +36,7 @@ function TurfDetailForm() {
       map_link:link,
       fives:fives,
       sevens:sevens,
-      image:selectedFile,
+      logo:selectedFile,
       elevens:elevens,
       cricket:cricket,
       parking:parking,
@@ -58,6 +58,7 @@ function TurfDetailForm() {
       };
     
    const submitDetails = (e)=>{
+    if (place.length!==0 || link.length!==0||selectedFile.length!=0){
       e.preventDefault()
       console.log(data);
       axios.post('http://127.0.0.1:8000/turf/add-details/', data,{
@@ -65,15 +66,19 @@ function TurfDetailForm() {
           'Content-Type': 'multipart/form-data'
       }
   }).then((response)=>{
+    handleClose()
     console.log(response);
+    alert("Succesfully Registered")
     if(response.status===201){
-      navigate('/login')
     }
   })
   .catch((error) => {
       console.log(error);
       alert(error.response.data.message);
-    })
+    })}
+    else{
+      alert("Fill the form")
+    }
   }
 
     
@@ -86,6 +91,7 @@ function TurfDetailForm() {
           style={{ width: "100%", margin: "5px" }}
           type="text"
           value = {place}
+          required
           onChange={(e)=>{setPlace(e.target.value)}}
           label="Place"
           variant="outlined"
@@ -95,6 +101,8 @@ function TurfDetailForm() {
           style={{ width: "100%", margin: "5px" }}
           type="text"
           value = {link}
+          required
+
           onChange={(e)=>{setLink(e.target.value)}}
           label="Map Link"
           variant="outlined"
@@ -102,7 +110,8 @@ function TurfDetailForm() {
         <br />
         <h5>Logo</h5>
         <br />
-        <input type = "file" accept="image/png, image/gif, image/jpeg" onChange={handleFileSelect}/>
+          
+        <input type = "file" required accept="image/png, image/gif, image/jpeg" onChange={handleFileSelect}/>
         {previewUrl==null?null:<img className='prev-image' src={previewUrl}alt="" srcset="" width="150" height="150"/>}
         <br />
         <br />

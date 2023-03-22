@@ -14,11 +14,11 @@ class TurfDetails(models.Model):
     elevens = models.BooleanField(default=False, null=True)
     cricket = models.BooleanField(default=False, null=True)
     cafe = models.BooleanField(default=False, null=True)
-    rest_room = models.BooleanField(default=False, null=True)
+    first_aid = models.BooleanField(default=False, null=True)
     locker = models.BooleanField(default=False, null=True)
     parking = models.BooleanField(default=False, null=True)
     shower = models.BooleanField(default=False, null=True)
-    image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    logo = models.ImageField(upload_to=upload_to, null=True, blank=True)
     
     def __str__(self):
         return self.turf.name

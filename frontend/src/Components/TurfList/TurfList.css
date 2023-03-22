@@ -1,0 +1,25 @@
+.turf-list-view{
+    margin:2rem auto;
+}
+
+.turf-card{
+    width: 80vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    transition: all 0.3s linear;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.turf-list-logo img{
+    margin-right:auto;
+    height:10rem;
+    width:10rem;
+    margin:auto 1rem;
+    border-radius: 10px;
+}

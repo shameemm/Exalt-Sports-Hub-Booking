@@ -11,18 +11,22 @@ import PartnerRegPage from './Pages/Partner/PartnerRegPage';
 import AdminLoginPage from './Pages/Admin/AdminLoginPage';
 import PartnerHome from './Pages/Partner/PartnerHome';
 import { useContext } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import AdminHome from './Pages/Admin/AdminHome';
 import ChatPage from './Pages/User/ChatPage';
+import ListView from './Pages/User/ListView';
 
 function App() {
   return (
     <div className="App">
-      <UserProvider>
+      <GoogleOAuthProvider clientId="892466016773-cf1ccscpnij2q9bes9684vb1erd186ov.apps.googleusercontent.com">
+      <UserProvider >
       <Routes>
         <Route path='' element={<Home/>} />
         <Route path='/admin' element={<AdminLoginPage/>}/>
         <Route path='/list' element={<h1>List</h1>}></Route>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/turf-list' element ={<ListView/>}/>
         <Route path='/admin-home' element={<AdminHome/>}/>
         <Route path='/partner_login' element ={<PartnerLoginpage/>}></Route>
         <Route path='/partner-reg' element = {<PartnerRegPage/>}></Route>
@@ -32,8 +36,7 @@ function App() {
         <Route path='*' element={<h1>404 Not Found</h1>}/>
       </Routes>
       </UserProvider>
-      
-      
+      </GoogleOAuthProvider>
     </div>
   );
 }

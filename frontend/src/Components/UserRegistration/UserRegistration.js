@@ -25,11 +25,12 @@ function UserRegistration() {
     e.preventDefault()
     if (name.length!==0 &&phone.length!==0&&email.length!==0&&password.length!==0){
       e.preventDefault()
+      navigate('/login')
       console.log(data)
       await axios.post('accounts/api/register/',data).then((res)=>{
         if (res.status===200){
           console.log(res)
-          navigate('/login')
+         
         }
       })
     }

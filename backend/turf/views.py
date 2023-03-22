@@ -21,9 +21,14 @@ class TurfDetailsView(APIView):
     
 class TurfRetrieveUpdateDestroyView(APIView):
     def get(self, request, pk):
-        turf = TurfDetails.objects.get(turf_id=pk)
-        serializer = TurfDetailsSerializer(turf)
-        return Response(serializer.data)
+        if TurfDetails.objects.filter(turf_id=pk).exists():
+            turf = TurfDetails.objects.get(turf_id=pk)
+            serializer = TurfDetailsSerializer(turf)
+            return Response(serializer.data)
+        else:
+            
+            return Response(False)
+            
     
     def put(self, request, pk):
         turf = TurfDetails.objects.get(pk=pk)

@@ -29,6 +29,9 @@ function PartnerRegistration() {
           console.log(res)
           navigate('/partner_login')
         }
+        else{
+          console.log(res.error);
+        }
       })
     }
     else{

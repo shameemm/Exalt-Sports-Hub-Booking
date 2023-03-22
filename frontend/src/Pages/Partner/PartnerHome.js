@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
+import axios from '../../axios'
 import Modal from '@mui/material/Modal'
 import Grid from '@mui/material/Grid'
 import TurfDetails from '../../Components/TurfDetail/TurfDetails'
@@ -23,14 +23,18 @@ const style = {
   p: 4,
 };
 function PartnerHome() {
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 const navigate = useNavigate()
 const token = localStorage.getItem('refresh')
+if( token!=null){
+const decode = jwt_decode(token)
+}
 useEffect(()=>{ if (token != null){
   const decode = jwt_decode(token)
-  console.log(decode.is_partner);
+  console.log("decode",decode);
   if (decode.is_partner===false){
     navigate('/partner_login')
   }
@@ -38,11 +42,20 @@ useEffect(()=>{ if (token != null){
 else{
   navigate('/partner_login')
 }},[navigate])
+useEffect(()=>{
+  const decode = jwt_decode(token)
+  axios.get(`http://127.0.0.1:8000/turf/get-details/${decode.user_id}/`).then((res)=>{
+    console.log("res",res.data);
+    if (res.data ===false){
+      handleOpen()
+    }
+  },)
+},[])
   return (
     <div>
       <Head></Head>
-
-      <Button onClick={handleOpen}>Open modal</Button>
+{/* 
+      <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -50,12 +63,12 @@ else{
         aria-describedby="modal-modal-description"
       ><Grid container spacing = {0}>
         <Box sx={style}>
-          <TurfDetailForm/>
+          <TurfDetailForm handleClose={handleClose}/>
         </Box>
         </Grid>
       </Modal>
         
-        <TurfDetails></TurfDetails>
+        <TurfDetails open = {open}></TurfDetails>
     </div>
   )
 }

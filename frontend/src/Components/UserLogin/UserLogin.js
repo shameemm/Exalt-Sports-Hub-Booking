@@ -2,15 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from '../../axios'
+
+import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import { UserContext } from '../../Context/UserContext';
-import { GoogleLogin } from '@react-oauth/google';
 
 
 function UserLogin() {
-    
     const navigate = useNavigate()
-    
     let passError = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
     let mailError = "Enter valid E-mail address"
     const [email,setEmail] = useState('')
@@ -19,6 +18,13 @@ function UserLogin() {
     const [access,setAccess] = useState('')
     const [error,setError] = useState('')
     const {token,setTokens}=useContext(UserContext)
+    const onSuccess = (response) => {
+        console.log(response);
+      };
+    
+      const onFailure = (error) => {
+        console.error(error);
+      };
     useEffect(()=>{
         const token = localStorage.getItem('refresh')
         if (token){
@@ -67,6 +73,7 @@ function UserLogin() {
             <div className="user-login-title">
                 <p>Login as User</p>
                 
+                
                 <p className="dont-have-account">Don't have an account? <Link className='link-register' to="/register"><p>Sign-Up</p></Link></p>
             </div>
             <div className="user-login-form">
@@ -78,8 +85,12 @@ function UserLogin() {
                     <div className="user-login-button">
                         <div className="or-signin">
                             <p>Or Login with - </p>
-                             <img  src="/icons/facebook.png" alt="" />
-                             <img  src="/icons/google.png" alt="" />
+                            <GoogleLogin
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}
+                            buttonText=""
+                            cookiePolicy={'single_host_origin'}
+                            />
                         </div>
                         <button onClick={login}> Login </button>
                     </div>
