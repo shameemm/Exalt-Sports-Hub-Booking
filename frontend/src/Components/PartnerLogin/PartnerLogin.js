@@ -3,6 +3,8 @@ import jwt_decode from 'jwt-decode'
 import axios from '../../axios'
 import './PartnerLogin.css'
 import { UserContext } from '../../Context/UserContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -10,6 +12,7 @@ function PartnerLogin() {
     const navigate = useNavigate()
     let passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
     let mailError = "Enter valid E-mail address"
+    const [loading,setLoading] = useState(false)
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [refresh,setRefresh] = useState('')
@@ -22,9 +25,9 @@ function PartnerLogin() {
             navigate("/partner-home")
         }
     },[navigate])
-    // useContext(UserContext.user)
-    // console.log(user);
+
     const loginPartner = async (e)=>{
+        setLoading(true)
         e.preventDefault()
         const data = {
             email:email,
@@ -33,6 +36,7 @@ function PartnerLogin() {
         console.log(data);
         if (email.length!=0 && password.length!=0){
         await axios.post('accounts/api/login/',data).then((res)=>{
+            console.log("res",res);
             if (res.status===200){
                 console.log(res.data);
                 const code = jwt_decode(res.data.refresh)
@@ -46,24 +50,36 @@ function PartnerLogin() {
                     setError(res.data.error)
                     setTokens(res.data.refresh)
                     navigate('/partner-home')
+                    setLoading(false)
                 }
                 else{
-                    alert('You are not a partner')
+                    toast.error('You are not a partner')
+                    setLoading(false)
                 }
             }
-            else if(res.status===401){
+            else if(res.data.status===401){
                 alert("Enter the valid username and password")
+                setLoading(false)
             }
             else{
-                alert("Something went wrong")
+                toast.error("Something went wrong")
+                setLoading(false)
             }
-        })}
+        }).catch((err)=>{
+            if( err.response.status===401){
+                toast.error("Enter the valid username and password")
+                setLoading(false)
+            }
+        })
+    }
         else{
-            alert("Enter username and password")
+            toast.error("Enter username and password")
+            setLoading(false)
         }
     }
   return (
     <div className='partner-login-container'>
+        <ToastContainer/>
         <div className="container">
             <div className="user-login-title">
                 <p>Login as Partner</p>
@@ -71,9 +87,9 @@ function PartnerLogin() {
             </div>
             <div className="user-login-form">
                 <form action="" onSubmit={loginPartner}>
-                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Username' />
+                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" value={email} onChange={(e)=>{setEmail(e.target.value);setLoading(false)}} placeholder='Username' />
                     <span>{mailError}</span>
-                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={(e)=>{setPassword(e.target.value);setLoading(false)}} placeholder='Password' />
                     <span>{passError}</span>
                     <div className="user-login-button">
                         <div className="or-signin">
@@ -81,7 +97,7 @@ function PartnerLogin() {
                              <img src="/icons/facebook.png" alt="" />
                              <img src="/icons/google.png" alt="" />
                         </div>
-                        <button type="submit"> Login </button>
+                        <button type="submit" disabled={loading}>{loading?"loading...": "Login"}</button>
                     </div>
                 </form>
             </div>

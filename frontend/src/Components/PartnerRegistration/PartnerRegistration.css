@@ -1,0 +1,13 @@
+.register-form button{
+    margin:auto;
+    height: 3rem;
+    width: 94%;
+    border-radius: 5px;
+    border: none;
+    margin-top: 0rem;
+    padding: 0rem;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #05B961;
+    color:#fff
+}

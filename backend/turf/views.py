@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import TurfDetailsSerializer
+from .serializers import TurfDetailsSerializer,TurfUpdateSerializer
 from rest_framework.response import Response
+from rest_framework import status
 from .models import TurfDetails
 # Create your views here.
 
 class AddTurfDetailsView(APIView):
+    print("add")
+    
     def post(self, request):
-        serializer = TurfDetailsSerializer(data=request.data)
+        serializer = TurfUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -19,6 +22,27 @@ class TurfDetailsView(APIView):
         serializer = TurfDetailsSerializer(turfs, many=True)
         return Response(serializer.data)
     
+class ApproveTurfView(APIView):
+    def patch(self, request, pk):
+        try:
+            turf = TurfDetails.objects.get(pk=pk)
+        except TurfDetails.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        turf.approved = True
+        turf.save()
+        return Response(status=status.HTTP_200_OK)
+    
+class RejectTurfView(APIView):
+    def patch(self, request, pk):
+        try:
+            turf = TurfDetails.objects.get(pk=pk)
+        except TurfDetails.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        turf.approved = False
+        turf.save()
+        return Response(status=status.HTTP_200_OK)
+            
+            
 class TurfRetrieveUpdateDestroyView(APIView):
     def get(self, request, pk):
         if TurfDetails.objects.filter(turf_id=pk).exists():
@@ -26,12 +50,11 @@ class TurfRetrieveUpdateDestroyView(APIView):
             serializer = TurfDetailsSerializer(turf)
             return Response(serializer.data)
         else:
-            
             return Response(False)
             
-    
     def put(self, request, pk):
-        turf = TurfDetails.objects.get(pk=pk)
+        turf = TurfDetails.objects.get(id=pk)
+        print(request.data)
         serializer = TurfDetailsSerializer(turf, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

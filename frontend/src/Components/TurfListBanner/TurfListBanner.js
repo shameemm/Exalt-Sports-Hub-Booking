@@ -5,7 +5,7 @@ function TurfListBanner() {
   return (
     <div>
         <div className="turf-list-banner">
-            <h3>Explore the turfs</h3>
+            <h3><b>Explore the turfs</b></h3>
         </div>
     </div>
   )

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import Rating from '@mui/material/Rating';
 import axios from '../../axios'
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -15,36 +16,37 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function TurfList() {
+  const viewTurf = (id)=>{}
   const [data, setData] = useState([])
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/turf/get-details/').then((res)=>{
+    axios.get('turf/get-details/').then((res)=>{
       console.log(res.data);
       setData(res.data)
     })
   },[])
   return (
-    <div>
+    <div className='user-turf-list'>
+      <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <div className="turf-list-view">
-        {data.map((data)=>
-
-          
-          <Grid item xs={12}>
-            <div className="turf-card">
-              <div className="turf-details">
-                <div className="turf-details-left">
-                  <div className="turf-list-logo">
-                    <img src={`http://127.0.0.1:8000${data.logo}`} alt="" />
-                  </div>
-                  <div className="turf-details-right">
-
-                  </div>
+        {data.map((item)=>{
+          if(item.approved){
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+              <Item>
+                <div className="turf-list-card">
+                  <img src={`http://localhost:8000/${item.logo}`} alt="" />
+                  <h3>{item.turf.name}</h3>
+                  <p>{item.place}</p>
+                  <Rating name="read-only" value='5' readOnly />
+                  <button > Book </button>
                 </div>
-              </div>  
-              </div>
-          </Grid>)}
-        </div>
+              </Item>
+            </Grid>
+            )
+          }
+        })}
       </Grid>
+    </Box>
     </div>
   )
 }

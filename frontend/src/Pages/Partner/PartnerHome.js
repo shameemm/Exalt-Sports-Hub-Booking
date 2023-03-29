@@ -50,7 +50,7 @@ useEffect(()=>{
       handleOpen()
     }
   },)
-},[])
+},[open])
   return (
     <div>
       <Head></Head>

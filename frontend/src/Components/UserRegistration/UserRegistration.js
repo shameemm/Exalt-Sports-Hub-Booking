@@ -4,7 +4,6 @@ import axios from '../../axios'
 import './UserRegistration.css'
 
 function UserRegistration() {
-  
   const navigate = useNavigate()
   const [name,setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -15,7 +14,7 @@ function UserRegistration() {
     phone:phone,
     email:email,
     password:password,
-    is_partner:false 
+    is_partner:false
   }
   const passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
   let nameError = "Name must be atleast 3 characters long"
@@ -24,6 +23,7 @@ function UserRegistration() {
   const register = async (e)=>{
     e.preventDefault()
     if (name.length!==0 &&phone.length!==0&&email.length!==0&&password.length!==0){
+      if(phone!=="0000000000"){
       e.preventDefault()
       navigate('/login')
       console.log(data)
@@ -32,7 +32,10 @@ function UserRegistration() {
           console.log(res)
          
         }
-      })
+      })}
+      else{
+        alert("Enter valid Mobile number")
+      }
     }
     else{
       alert("Please fill the fields")

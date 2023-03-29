@@ -40,7 +40,7 @@ function Banner() {
               <ColorButton variant = "outlined"><Link className="button-banner" to='/explore'> Explore </Link></ColorButton>
             </div> */}
             <div className="button-explore">
-              <ColorButton variant = "outlined"><Link className="button-banner" to='/turf-list'> Book Now </Link></ColorButton>
+              <ColorButton style={{marginTop:'1rem'}} variant = "outlined"><Link className="button-banner" to='/turf-list'> Book Now </Link></ColorButton>
             </div>
             {/* <div className="banner-gradient"></div> */}
           </div>

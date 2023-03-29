@@ -3,6 +3,7 @@ import './index.css'
 import {Routes,Route} from 'react-router-dom'
 import PartnerLoginpage from './Pages/Partner/PartnerLoginPage';
 
+import { ToastContainer, toast } from 'react-toastify';
 import Login from './Pages/User/Login';
 import Home from './Pages/User/Home';
 import {UserContext, UserProvider} from './Context/UserContext'
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <GoogleOAuthProvider clientId="892466016773-cf1ccscpnij2q9bes9684vb1erd186ov.apps.googleusercontent.com">
       <UserProvider >
+      {/* <ToastContainer /> */}
       <Routes>
         <Route path='' element={<Home/>} />
         <Route path='/admin' element={<AdminLoginPage/>}/>
