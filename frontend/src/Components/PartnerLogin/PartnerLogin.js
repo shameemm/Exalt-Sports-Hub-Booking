@@ -42,13 +42,13 @@ function PartnerLogin() {
                 const code = jwt_decode(res.data.refresh)
                 console.log(code.is_partner);
                 if (code.is_partner === true){
-                    localStorage.setItem('refresh',res.data.refresh)
+                    localStorage.setItem('token',JSON.stringify(res.data))
                     localStorage.setItem('access',res.data.access)
-                    localStorage.setItem('user',res.data.user)
-                    setRefresh(res.data.refresh)
-                    setAccess(res.data.access)
-                    setError(res.data.error)
-                    setTokens(res.data.refresh)
+                    // localStorage.setItem('user',res.data.user)
+                    // setRefresh(res.data.refresh)
+                    // setAccess(res.data.access)
+                    // setError(res.data.error)
+                    // setTokens(res.data.refresh)
                     navigate('/partner-home')
                     setLoading(false)
                 }
@@ -66,10 +66,11 @@ function PartnerLogin() {
                 setLoading(false)
             }
         }).catch((err)=>{
-            if( err.response.status===401){
-                toast.error("Enter the valid username and password")
-                setLoading(false)
-            }
+            toast.error("Something went wrong")
+            // if( err.response.status===401){
+            //     toast.error("Enter the valid username and password")
+            //     setLoading(false)
+            // }
         })
     }
         else{

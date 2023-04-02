@@ -8,27 +8,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        # Add custom claims
-        token['iat'] = datetime.now()
-        token['user'] = user.name
-        token['email'] = user.email
         token['is_partner'] = user.is_partner
-        token['date'] = str(datetime.now())
-
         return token
 
 class MyAdminTokenObtainPairSerializer(TokenObtainPairSerializer):
-
-
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token['iat'] = datetime.now()
-        token['user'] = user.name
-        token['email'] = user.email
         token['is_superuser'] = user.is_superuser
-        token['date'] = str(datetime.now())
-
         return token
 
 class UserSerializer(serializers.ModelSerializer):

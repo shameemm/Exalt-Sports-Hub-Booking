@@ -3,12 +3,12 @@ from rest_framework.views import APIView
 from .serializers import TurfDetailsSerializer,TurfUpdateSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from accounts.permissions import IsPartner,IsSuperUser
 from .models import TurfDetails
 # Create your views here.
 
 class AddTurfDetailsView(APIView):
-    print("add")
-    
+    permission_classes = [IsPartner]
     def post(self, request):
         serializer = TurfUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -17,12 +17,14 @@ class AddTurfDetailsView(APIView):
     
     
 class TurfDetailsView(APIView):
+    permission_classes = [IsPartner]
     def get(self, request):
         turfs = TurfDetails.objects.all()
         serializer = TurfDetailsSerializer(turfs, many=True)
         return Response(serializer.data)
     
 class ApproveTurfView(APIView):
+    permission_classes = [IsSuperUser]
     def patch(self, request, pk):
         try:
             turf = TurfDetails.objects.get(pk=pk)
@@ -33,6 +35,7 @@ class ApproveTurfView(APIView):
         return Response(status=status.HTTP_200_OK)
     
 class RejectTurfView(APIView):
+    permission_classes = [IsSuperUser]
     def patch(self, request, pk):
         try:
             turf = TurfDetails.objects.get(pk=pk)
@@ -44,6 +47,7 @@ class RejectTurfView(APIView):
             
             
 class TurfRetrieveUpdateDestroyView(APIView):
+    permission_classes = [IsPartner]
     def get(self, request, pk):
         if TurfDetails.objects.filter(turf_id=pk).exists():
             turf = TurfDetails.objects.get(turf_id=pk)

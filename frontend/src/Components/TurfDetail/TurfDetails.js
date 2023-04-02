@@ -8,15 +8,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 function TurfDetails({open}) {
-    const token = localStorage.getItem('refresh')
+    const token = localStorage.getItem('access')
     const decode = jwt_decode(token)
     const [data, setData] = useState({})
     console.log(decode);
     const id = decode.user_id
     useEffect(()=>{
+        
         axios.get(`http://127.0.0.1:8000/turf/get-details/${id}/`)
         .then((response)=>{
+            console.log("data",response.data);
             setData(response.data)
+        }).catch((error)=>{
+            console.log(error);
         })
     },[open])
     console.log(data);
@@ -66,7 +70,7 @@ function TurfDetails({open}) {
                 <div className="turf-address">
                     
                     <div className="turf-name">
-                        <h2>{decode.user}</h2>
+                        <h2></h2>
                     </div>
                     <div className="turf-place">
                         <h4>{data.place}</h4>

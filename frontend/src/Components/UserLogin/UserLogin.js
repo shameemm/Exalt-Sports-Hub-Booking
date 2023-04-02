@@ -48,7 +48,7 @@ function UserLogin() {
                 const code = jwt_decode(res.data.refresh)
                 console.log(code.is_partner);
                 if (code.is_partner === false){
-                    localStorage.setItem('refresh',res.data.refresh)
+                    localStorage.setItem('token',JSON.stringify(res.data))
                     localStorage.setItem('access',res.data.access)
                     localStorage.setItem('user',res.data.user)
                     setRefresh(res.data.refresh)
