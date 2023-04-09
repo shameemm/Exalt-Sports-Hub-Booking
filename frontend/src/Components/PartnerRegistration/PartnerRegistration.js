@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './PartnerRegistration.css'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -46,9 +46,17 @@ function PartnerRegistration() {
     password:password,
     is_partner:true 
   }
-  // if(password===confirmPass){
-    // setMatchPass(true)
-  // }
+  useEffect(()=>{
+    console.log(matchPass);
+  if(password===confirmPass){
+      setMatchPass(true)
+      
+    }
+    else{
+      setMatchPass(false)
+    }
+  },[password,confirmPass])
+  
   const passError = "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
   let nameError = "Name must be atleast 3 characters long"
   let phoneError = "Enter valid phone number"
@@ -68,6 +76,10 @@ function PartnerRegistration() {
         toast.error(err)
       })
   }
+
+  const styleObj = {
+    color: "green",
+}
   const register = async ()=>{
     setLoading(true)
     
@@ -181,8 +193,8 @@ function PartnerRegistration() {
           {showPassword ? "Hide Password" : "Show Password"}
         </p>
           <span>{passError}</span>
-          {/* <input type="text" value={confirmPass} onChange={(e)=>{setConfirmPass(e.target.value)}}  name="confirm-password" id="" placeholder='Confirm Password'/>
-          <span>{matchPass ? "Passwords Match" : "Passwords do not match"}</span> */}
+          <input type="text" value={confirmPass} onChange={(e)=>{setConfirmPass(e.target.value)}}  name="confirm-password" id="" placeholder='Confirm Password'/>
+          <span>{matchPass ? <p style={styleObj}>"Passwords Match"</p> : "Passwords do not match"}</span>
           <button type="submit" className="register-button" disabled={loading}>{loading ? 'Loading...' : 'Register'}</button>
           {/* <input type="submit" value="Register" /> */}
         </form>

@@ -9,6 +9,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         token['is_partner'] = user.is_partner
+        token['is_active'] = user.is_active
         return token
 
 class MyAdminTokenObtainPairSerializer(TokenObtainPairSerializer):

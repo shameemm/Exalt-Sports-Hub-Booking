@@ -136,6 +136,7 @@ class VerifyPartnerLoginOtpView(APIView):
                 
                 refresh = RefreshToken.for_user(user)
                 refresh['is_partner'] = user.is_partner
+                refresh['is_active'] = user.is_active
                 access = str(refresh.access_token)
                 payload = {
                     'access': str(access),
