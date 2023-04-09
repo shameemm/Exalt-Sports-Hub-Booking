@@ -6,24 +6,28 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 function TurfDetails({open}) {
-    const token = localStorage.getItem('access')
-    const decode = jwt_decode(token)
-    const [data, setData] = useState({})
-    console.log(decode);
+    const navigate = useNavigate()
+    const token = JSON.parse(localStorage.getItem('token'))
+    console.log("token",token);
+    const [turfName,setTurfName] = useState('')
+    const decode = jwt_decode(token.access)
+    const [data, setData] = useState([])
+    console.log(decode.user_id);
     const id = decode.user_id
     useEffect(()=>{
-        
         axios.get(`http://127.0.0.1:8000/turf/get-details/${id}/`)
         .then((response)=>{
             console.log("data",response.data);
             setData(response.data)
+            setTurfName(response.data.turf.name)
         }).catch((error)=>{
             console.log(error);
         })
     },[open])
-    console.log(data);
+    console.log("data[0]",data);
     // const itemData = [
     //     {
     //       img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
@@ -70,7 +74,7 @@ function TurfDetails({open}) {
                 <div className="turf-address">
                     
                     <div className="turf-name">
-                        <h2></h2>
+                        <h2>{turfName}</h2>
                     </div>
                     <div className="turf-place">
                         <h4>{data.place}</h4>

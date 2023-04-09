@@ -35,7 +35,7 @@ class ApproveTurfView(APIView):
         return Response(status=status.HTTP_200_OK)
     
 class RejectTurfView(APIView):
-    permission_classes = [IsSuperUser]
+    # permission_classes = [IsSuperUser]
     def patch(self, request, pk):
         try:
             turf = TurfDetails.objects.get(pk=pk)
@@ -44,8 +44,17 @@ class RejectTurfView(APIView):
         turf.approved = False
         turf.save()
         return Response(status=status.HTTP_200_OK)
-            
-            
+        
+class ViewTurfUserView(APIView):
+    # permission_classes = 
+    def get(self, request, pk):
+        if TurfDetails.objects.filter(id=pk).exists():
+            turf = TurfDetails.objects.get(id=pk)
+            serializer = TurfDetailsSerializer(turf)
+            return Response(serializer.data)
+        else:
+            return Response(False)
+             
 class TurfRetrieveUpdateDestroyView(APIView):
     permission_classes = [IsPartner]
     def get(self, request, pk):

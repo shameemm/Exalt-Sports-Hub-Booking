@@ -16,6 +16,9 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import AdminHome from './Pages/Admin/AdminHome';
 import ChatPage from './Pages/User/ChatPage';
 import ListView from './Pages/User/ListView';
+import TurfView from './Pages/User/TurfView';
+import ApproveTurfPage from './Pages/Admin/ApproveTurfPage';
+import UsersList from './Pages/Admin/UsersList';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path='/partner-home' element = {<PartnerHome/>}/>
         <Route path='/register' element={<Registration/>}/>
         <Route path='/chat' element={<ChatPage/>}></Route>
+        <Route path='/approve-turf' element={<ApproveTurfPage/>}></Route>
+        <Route path='/view-turf/:id' element={<TurfView/>}></Route>
+        <Route path='/users' element={<UsersList/>}/>
         <Route path='*' element={<h1>404 Not Found</h1>}/>
       </Routes>
       </UserProvider>

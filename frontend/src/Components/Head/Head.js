@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './Head.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../Context/UserContext'
@@ -45,7 +45,6 @@ function Head() {
   const navigate = useNavigate()
   console.log(window.location.pathname)
   const { token, setTokens } = useContext(UserContext)
-  
   { token ? console.log("head", token) : console.log("Null") }
   // let decode = jwt_decode(token)
   const logout = () => {
@@ -63,8 +62,6 @@ function Head() {
       <AppBar position="static" style={{ background: '#ffffff' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-
-
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"

@@ -28,7 +28,7 @@ function AdminHome() {
         <Grid container >
             <Grid md={2} style={{display:'flex'}}>
                 <AdminNav/>
-                <ApproveTurf/>
+                Dashboard
             </Grid>
         </Grid>
     </div>

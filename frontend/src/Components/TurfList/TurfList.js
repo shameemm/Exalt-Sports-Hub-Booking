@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Rating from '@mui/material/Rating';
 import axios from '../../axios'
+import {Link} from 'react-router-dom'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -16,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function TurfList() {
+  const buttonStyle = {color : 'white'}
   const viewTurf = (id)=>{}
   const [data, setData] = useState([])
   useEffect(()=>{
@@ -38,7 +40,7 @@ function TurfList() {
                   <h3>{item.turf.name}</h3>
                   <p>{item.place}</p>
                   <Rating name="read-only" value='5' readOnly />
-                  <button > Book </button>
+                  <button > <Link style={buttonStyle} to={`/view-turf/${item.id}`}> Book</Link> </button>
                 </div>
               </Item>
             </Grid>

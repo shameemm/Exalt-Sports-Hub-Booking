@@ -28,12 +28,13 @@ function PartnerHome() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 const navigate = useNavigate()
-const token = localStorage.getItem('refresh')
+const token = JSON.parse(localStorage.getItem('token'))
 if( token!=null){
-const decode = jwt_decode(token)
+const decode = jwt_decode(token.access)
 }
-useEffect(()=>{ if (token != null){
-  const decode = jwt_decode(token)
+useEffect(()=>{
+   if (token != null){
+  const decode = jwt_decode(token.access)
   console.log("decode",decode);
   if (decode.is_partner===false){
     navigate('/partner_login')
@@ -41,9 +42,12 @@ useEffect(()=>{ if (token != null){
 }
 else{
   navigate('/partner_login')
-}},[navigate])
+}
+}
+,[navigate])
 useEffect(()=>{
-  const decode = jwt_decode(token)
+  const decode = jwt_decode(token.access)
+  
   axios.get(`http://127.0.0.1:8000/turf/get-details/${decode.user_id}/`).then((res)=>{
     console.log("res",res.data);
     if (res.data ===false){

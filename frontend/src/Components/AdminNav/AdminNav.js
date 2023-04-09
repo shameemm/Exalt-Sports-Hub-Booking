@@ -35,18 +35,18 @@ function AdminNav() {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
+            <NavLink exact to="/approve-turf" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Approve Turf</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+            <NavLink exact to="/users" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Users</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            {/* <NavLink exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/analytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
-            </NavLink>
+            </NavLink> */}
               <CDBSidebarMenuItem icon="exclamation-circle" onClick={logout}>Logout</CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>

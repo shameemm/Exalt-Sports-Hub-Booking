@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './UserLogin.css'
 import {Link, useNavigate} from 'react-router-dom'
-import axios from '../../axios'
+import axios,{unAuthInstance} from '../../axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleLogin } from '@react-oauth/google';
@@ -43,11 +43,11 @@ function UserLogin() {
         }
         console.log(data)
         if (email.length != 0 && password.length !=0){
-        await axios.post('accounts/api/login/',data).then((res)=>{
+        await unAuthInstance.post('accounts/api/login/',data).then((res)=>{
             if (res.status===200){
                 const code = jwt_decode(res.data.refresh)
                 console.log(code.is_partner);
-                if (code.is_partner === false){
+                if (code.is_partner === false && code.is_active === true){
                     localStorage.setItem('token',JSON.stringify(res.data))
                     localStorage.setItem('access',res.data.access)
                     localStorage.setItem('user',res.data.user)

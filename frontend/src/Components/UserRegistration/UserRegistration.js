@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../../axios'
+import axios, { unAuthInstance } from '../../axios'
 import './UserRegistration.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function UserRegistration() {
   const navigate = useNavigate()
@@ -27,22 +30,23 @@ function UserRegistration() {
       e.preventDefault()
       navigate('/login')
       console.log(data)
-      await axios.post('accounts/api/register/',data).then((res)=>{
+      await unAuthInstance.post('accounts/api/register/',data).then((res)=>{
         if (res.status===200){
           console.log(res)
          
         }
       })}
       else{
-        alert("Enter valid Mobile number")
+        toast.error("Enter valid Mobile number")
       }
     }
     else{
-      alert("Please fill the fields")
+      toast.error("Please fill the fields")
     }
   }       
   return (
     <div>
+      <ToastContainer/>
       <div className="register-head-card">
         <div className="register_title">
           <p>Register as User</p>

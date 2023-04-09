@@ -37,8 +37,8 @@ function TurfDetailForm({ handleClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [position, setPosition] = useState({ lat: 11.033891443915735, lng: 76.08324340090986 });
-  const token = localStorage.getItem('refresh')
-  const decode = jwt_decode(token)
+  const token = JSON.parse(localStorage.getItem('token'))
+  const decode = jwt_decode(token.access)
   console.log(decode);
   const data = {
     turf: decode.user_id,
