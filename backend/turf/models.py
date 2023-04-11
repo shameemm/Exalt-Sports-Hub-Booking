@@ -5,10 +5,15 @@ from accounts.models import UserData
 def upload_to(instance, filename):
     return 'images/turf-logo/{filename}'.format(filename=filename)
 
-
+class Pricing(models.Model):
+    fives = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    sevens = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    elevens = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    cricket = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 class TurfDetails(models.Model):
-    turf = models.ForeignKey(UserData, on_delete=models.CASCADE, null=True)
+    turf = models.ForeignKey(UserData,on_delete=models.CASCADE , null=True)
+    price = models.ForeignKey(Pricing, on_delete=models.CASCADE, null=True)
     place = models.CharField(max_length = 150, null=True)
     lat = models.CharField(max_length = 100, null=True)
     lng = models.CharField(max_length = 100, null=True)

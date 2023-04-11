@@ -21,10 +21,10 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function Banner() {
-  const {token} = useContext(UserContext)
+  const token = JSON.parse(localStorage.getItem('token'))
   if(token!=null){
     console.log(token);
-    const decoded = jwt_decode(token)
+    const decoded = jwt_decode(token.access)
     console.log(decoded.user);
   }
   return (

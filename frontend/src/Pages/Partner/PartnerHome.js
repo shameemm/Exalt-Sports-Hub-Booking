@@ -35,7 +35,6 @@ const decode = jwt_decode(token.access)
 useEffect(()=>{
    if (token != null){
   const decode = jwt_decode(token.access)
-  console.log("decode",decode);
   if (decode.is_partner===false){
     navigate('/partner_login')
   }

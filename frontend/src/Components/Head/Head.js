@@ -43,9 +43,9 @@ function Head() {
   };
 
   const navigate = useNavigate()
-  console.log(window.location.pathname)
+  // console.log(window.location.pathname)
   const { token, setTokens } = useContext(UserContext)
-  { token ? console.log("head", token) : console.log("Null") }
+  // { token ? console.log("head", token) : console.log("Null") }
   // let decode = jwt_decode(token)
   const logout = () => {
     localStorage.clear()

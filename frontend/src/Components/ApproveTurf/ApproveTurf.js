@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button } from '@mui/material';
 import axios from '../../axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -38,9 +39,9 @@ function ApproveTurf() {
         'approve' : false
       }
       axios.patch(`turf/reject-turf/${id}/`,data).then((res)=>{
-        alert("updated")
+        toast("updated")
       }).catch((err)=>{
-        alert(err)
+        toast.error(err)
       })
   }
     useEffect(()=>{
@@ -55,10 +56,8 @@ function ApproveTurf() {
         <div className="approve-turf-body">
         <Grid container spacing={8}>
         {data.map((data)=>{
-          if(data.approved === true){
-            return null
-          }
-          else{
+          if(data.turf){
+          
             return(
               
               <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -73,10 +72,11 @@ function ApproveTurf() {
                   <div className="approve-card-body">
                     <p>{data.place}</p>
                   </div>
-                  <div className="approve-card-buttons">
+                  { data.approved? <p><b>Approved</b></p>:
+                    <div className="approve-card-buttons">
                     <Button variant="contained" color="success" onClick={(e)=>acceptTurf(data.id,e)}>Accept</Button>
                     <Button variant="contained" color="error" onClick={(e)=>rejectTurf(data.id,e)}>Reject</Button>
-                  </div>
+                  </div>}
                   </div>
                 
                 {/* </Item> */}

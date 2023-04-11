@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import TurfDetailsSerializer,TurfUpdateSerializer
+from .serializers import TurfDetailsSerializer,TurfUpdateSerializer,TurfPricingSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from accounts.permissions import IsPartner,IsSuperUser
@@ -10,6 +10,7 @@ from .models import TurfDetails
 class AddTurfDetailsView(APIView):
     permission_classes = [IsPartner]
     def post(self, request):
+        print(request.data)
         serializer = TurfUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -24,7 +25,7 @@ class TurfDetailsView(APIView):
         return Response(serializer.data)
     
 class ApproveTurfView(APIView):
-    permission_classes = [IsSuperUser]
+    # permission_classes = [IsSuperUser]
     def patch(self, request, pk):
         try:
             turf = TurfDetails.objects.get(pk=pk)
@@ -60,6 +61,8 @@ class TurfRetrieveUpdateDestroyView(APIView):
     def get(self, request, pk):
         if TurfDetails.objects.filter(turf_id=pk).exists():
             turf = TurfDetails.objects.get(turf_id=pk)
+            # courts = turf.price.all()
+            # print(courts)
             serializer = TurfDetailsSerializer(turf)
             return Response(serializer.data)
         else:
@@ -77,4 +80,14 @@ class TurfRetrieveUpdateDestroyView(APIView):
         turf = TurfDetails.objects.get(pk=pk)
         turf.delete()
         return Response("Turf deleted successfully")
+    
+class SetTurfPriceView(APIView):
+    permission_classes = [IsPartner]
+    def post(self, request):
+        print(request.data)
+        serializer =  TurfPricingSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+        # return Response("done")
         

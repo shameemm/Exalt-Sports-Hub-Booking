@@ -6,6 +6,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function TurfDetails({open}) {
@@ -25,6 +26,10 @@ function TurfDetails({open}) {
             setTurfName(response.data.turf.name)
         }).catch((error)=>{
             console.log(error);
+            if(error.response.status===401){
+                toast.error("You are not Authorized")
+                navigate('/partner')
+            }
         })
     },[open])
     console.log("data[0]",data);
@@ -84,10 +89,10 @@ function TurfDetails({open}) {
                     <div className="court-details-heading">
                         <h3>Courts Availible</h3>
                         <ul className="court-list">
-                            {data.fives?<li>5's Football</li>:""}
-                            {data.sevens?<li>7's Football</li>:""}
-                            {data.elevens?<li>11's Football</li>:""}
-                            {data.cricket?<li>Cricket</li>:""}
+                            {data.fives?<li>5's Football  {data.price.fives}</li>:""}
+                            {data.sevens?<li>7's Football {data.price.sevens}</li>:""}
+                            {data.elevens?<li>11's Football {data.price.elevens}</li>:""}
+                            {data.cricket?<li>Cricket {data.price.cricket}</li>:""}
                         </ul>
                     </div>
                 </div>

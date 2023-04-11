@@ -7,5 +7,6 @@ urlpatterns=[
     path('get-details/<int:pk>/', TurfRetrieveUpdateDestroyView.as_view(), name='get_details/id'),
     path('approve-turf/<int:pk>/', ApproveTurfView.as_view(), name='approve-turf'),
     path('view-turf/<int:pk>/', ViewTurfUserView.as_view(), name='view-turf'),
-    path('reject-turf/<int:pk>/', RejectTurfView.as_view(), name='approve-turf')
+    path('reject-turf/<int:pk>/', RejectTurfView.as_view(), name='approve-turf'),
+    path('add-pricing/',SetTurfPriceView.as_view(), name='add-pricing'),
 ]

@@ -19,6 +19,7 @@ import ListView from './Pages/User/ListView';
 import TurfView from './Pages/User/TurfView';
 import ApproveTurfPage from './Pages/Admin/ApproveTurfPage';
 import UsersList from './Pages/Admin/UsersList';
+import BookingPage from './Pages/User/BookingPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/turf-list' element ={<ListView/>}/>
         <Route path='/admin-home' element={<AdminHome/>}/>
+        <Route path='/booking-user' element={<BookingPage/>}/>
         <Route path='/partner_login' element ={<PartnerLoginpage/>}></Route>
         <Route path='/partner-reg' element = {<PartnerRegPage/>}></Route>
         <Route path='/partner-home' element = {<PartnerHome/>}/>

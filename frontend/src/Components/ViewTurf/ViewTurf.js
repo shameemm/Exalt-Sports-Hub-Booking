@@ -1,10 +1,21 @@
 import React, { useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../../axios'
+import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+const ColorButton = styled(Button)(({ theme }) => ({
+    width:'100%',
+  color: theme.palette.getContrastText('#2B7754'),
+  backgroundColor: '#2B7754',
+  '&:hover': {
+    backgroundColor: '#2B7754',
+  },
+}));
 
 function ViewTurf() {
+    const navigate = useNavigate()
     const [data,setData] = useState([])
     const [turfName, setTurfName] = useState()
     const {id} = useParams()
@@ -54,13 +65,14 @@ function ViewTurf() {
                      <div className="court-details-heading">
                          <h3>Courts Availible</h3>
                          <ul className="court-list">
-                             {data.fives?<li>5's Football</li>:""}
-                             {data.sevens?<li>7's Football</li>:""}
-                             {data.elevens?<li>11's Football</li>:""}
-                             {data.cricket?<li>Cricket</li>:""}
+                            {data.fives?<li>5's Football    - ₹{data.price.fives}/-</li>:""}
+                            {data.sevens?<li>7's Football   - ₹{data.price.sevens}/-</li>:""}
+                            {data.elevens?<li>11's Football - ₹{data.price.elevens}/-</li>:""}
+                            {data.cricket?<li>Cricket       - ₹{data.price.cricket}/-</li>:""}
                          </ul>
                      </div>
                  </div>
+                 <ColorButton onClick={()=>{navigate('/booking-user')}}> Book Now</ColorButton>
              </div>
             
             
