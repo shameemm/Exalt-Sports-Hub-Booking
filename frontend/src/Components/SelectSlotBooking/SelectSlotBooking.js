@@ -7,16 +7,16 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { toast, ToastContainer } from 'react-toastify';
 import { styled } from '@mui/material/styles';
-import DatePicker from 'react-datepicker';
 import useRazorpay from 'react-razorpay'
 import 'react-datepicker/dist/react-datepicker.css';
-
 import jwt_decode from 'jwt-decode'
 import axios ,{ unAuthInstance } from '../../axios';
 
@@ -171,7 +171,14 @@ function SelectSlotBooking() {
             console.log(bookData);
             axios.post('booking/create-booking/', bookData).then((res)=>{
               console.log(res.data);
-              navigate('/')
+              Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your booking has been created.',
+                confirmButtonText: 'OK',
+              }).then(() => {
+                navigate('/');
+              });    
             })
           }
         },

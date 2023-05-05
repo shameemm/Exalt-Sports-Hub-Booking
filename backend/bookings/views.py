@@ -16,12 +16,12 @@ def add_earnings(turf, amount):
     current_date = date.today()
     if Earnings.objects.filter(turf_id=turf).exists():
         print(True)
-        earnings = Earnings.objects.get(turf_id=turf)
-        if earnings.day == current_date:
-            print(earnings.amount,"======",amount,"  123",earnings.amount + amount)
-            total = earnings.amount + amount
-            earnings.amount = total
-            earnings.save()
+        earnings = Earnings.objects.filter(turf_id=turf)
+        if earnings[0].day == current_date:
+            print(earnings[0].amount,"======",amount,"  123",earnings[0].amount + amount)
+            total = earnings[0].amount + amount
+            earnings[0].amount = total
+            earnings[0].save()
         else:
             earning = Earnings.objects.create(turf_id=turf, amount=amount)
             earning.save()

@@ -39,6 +39,7 @@
     "recharts": "^2.5.0",
     "safe-buffer": "^5.2.1",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.5",
     "victory": "^36.6.8",
     "web-vitals": "^2.1.4"
   },

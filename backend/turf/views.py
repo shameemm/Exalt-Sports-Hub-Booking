@@ -51,7 +51,7 @@ class AddReviewRatingView(APIView):
     
 class TurfDetailsView(APIView):
     def get(self, request):
-        turfs = TurfDetails.objects.all()
+        turfs = TurfDetails.objects.filter(approved=True, unlisted=False)
         serializer = TurfDetailsSerializer(turfs, many=True)
         return Response(serializer.data)
     
