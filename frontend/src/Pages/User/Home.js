@@ -14,7 +14,7 @@ function Home() {
         <Head></Head>
         <Banner/>
         <TopRated/>
-        <SearchBook/>
+        {/* <SearchBook/> */}
         
         
        

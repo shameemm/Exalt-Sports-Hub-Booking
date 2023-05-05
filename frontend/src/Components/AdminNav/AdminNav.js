@@ -41,6 +41,9 @@ function AdminNav() {
             <NavLink exact to="/users" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Users</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/admin-bookings" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Bookings</CDBSidebarMenuItem>
+            </NavLink>
             {/* <NavLink exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>

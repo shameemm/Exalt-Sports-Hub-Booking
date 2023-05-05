@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './TurfList.css'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Rating from '@mui/material/Rating';
-import axios from '../../axios'
+import axios,{unAuthInstance} from '../../axios'
 import {Link} from 'react-router-dom'
+import { TurfContext } from '../../Context/TurfContext';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,10 +19,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function TurfList() {
   const buttonStyle = {color : 'white'}
+  const {turf,} = useContext(TurfContext)
   const viewTurf = (id)=>{}
   const [data, setData] = useState([])
   useEffect(()=>{
-    axios.get('turf/get-details/').then((res)=>{
+    unAuthInstance.get('turf/get-details/').then((res)=>{
       console.log(res.data);
       setData(res.data)
     })

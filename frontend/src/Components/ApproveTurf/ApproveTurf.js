@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button } from '@mui/material';
-import axios from '../../axios';
+import axios, { unAuthInstance } from '../../axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,10 +27,15 @@ function ApproveTurf() {
           'approve' : true
         }
         axios.patch(`turf/approve-turf/${id}/`,data).then((res)=>{
-          alert("updated")
+          toast("updated")
         }).catch((err)=>{
-          alert(err)
+          toast.error(err)
         })
+    }
+    const unlistTurf = (id) =>{
+      unAuthInstance.patch(`turf/unlist-turf/${id}/`).then((res)=>{
+        console.log(res.data);
+      })
     }
     function rejectTurf(id,e){
       console.log(id);
@@ -77,6 +82,7 @@ function ApproveTurf() {
                     <Button variant="contained" color="success" onClick={(e)=>acceptTurf(data.id,e)}>Accept</Button>
                     <Button variant="contained" color="error" onClick={(e)=>rejectTurf(data.id,e)}>Reject</Button>
                   </div>}
+                  {data.unlisted?<p>Unlisted</p>:<Button onClick={()=>{unlistTurf(data.id)}}> Unlist </Button>}
                   </div>
                 
                 {/* </Item> */}

@@ -25,7 +25,7 @@ function Banner() {
   if(token!=null){
     console.log(token);
     const decoded = jwt_decode(token.access)
-    console.log(decoded.user);
+    console.log(decoded.is_partner);
   }
   return (
     <div>

@@ -24,5 +24,5 @@ urlpatterns = [
     path('turf/', include('turf.urls')),
     path('admins/', include('admin.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    path('booking/',include('booking.urls')),
+    path('booking/',include('bookings.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -20,12 +20,18 @@ import TurfView from './Pages/User/TurfView';
 import ApproveTurfPage from './Pages/Admin/ApproveTurfPage';
 import UsersList from './Pages/Admin/UsersList';
 import BookingPage from './Pages/User/BookingPage';
+import AdminBookingsView from './Pages/Admin/AdminBookingsView';
+import BookingViewTurf from './Pages/Partner/BookingViewTurf';
+import { TurfProvider } from './Context/TurfContext';
+import ShowBookings from './Pages/User/ShowBookings';
+import EarningsPage from './Pages/Partner/EarningsPage';
 
 function App() {
   return (
     <div className="App">
       <GoogleOAuthProvider clientId="892466016773-cf1ccscpnij2q9bes9684vb1erd186ov.apps.googleusercontent.com">
       <UserProvider >
+        <TurfProvider>
       {/* <ToastContainer /> */}
       <Routes>
         <Route path='' element={<Home/>} />
@@ -43,8 +49,13 @@ function App() {
         <Route path='/approve-turf' element={<ApproveTurfPage/>}></Route>
         <Route path='/view-turf/:id' element={<TurfView/>}></Route>
         <Route path='/users' element={<UsersList/>}/>
+        <Route path = '/admin-bookings' element ={<AdminBookingsView/>}/>
+        <Route path = '/partner-bookings' element = {<BookingViewTurf/>}/>
+        <Route path = '/user-bookings' element={<ShowBookings/>}/>
         <Route path='*' element={<h1>404 Not Found</h1>}/>
+        <Route path='/earnings/:id' element={<EarningsPage/>}/>
       </Routes>
+      </TurfProvider>
       </UserProvider>
       </GoogleOAuthProvider>
     </div>

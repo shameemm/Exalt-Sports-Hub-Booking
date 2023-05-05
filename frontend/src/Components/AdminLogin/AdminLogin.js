@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './AdminLogin.css'
 import jwt_decode from 'jwt-decode'
-import axios from '../../axios'
+import axios, { unAuthInstance } from '../../axios'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../Context/UserContext'
 
@@ -26,12 +26,14 @@ function AdminLogin() {
     const login = async (e)=>{
         e.preventDefault()
         if (email.lenght!=0 && password.length!=0){
-        await axios.post('accounts/api/admin_login/',data).then((res)=>{
+        await unAuthInstance.post('accounts/api/admin_login/',data).then((res)=>{
             if (res.status ===200){
                 console.log(res.data.refresh);
                 const code = jwt_decode(res.data.refresh)
                 console.log(code);
                 if (code.is_superuser === true){
+                
+                    localStorage.setItem('token',JSON.stringify(res.data))
                     localStorage.setItem('refresh',res.data.refresh)
                     localStorage.setItem('access',res.data.access)
                     setTokens(res.data.refresh)

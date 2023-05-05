@@ -5,7 +5,7 @@
     /* position: absolute; */
 }
 
-.card{
+.card-toprated{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,7 +13,7 @@
     margin: 1.5rem;
     padding: 1rem;
     width: 12rem;
-    height: 12rem;
+    height: 15rem;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -39,7 +39,7 @@
     font-weight: 600;
     text-align: left;
     padding-top: 1rem;
-    height: 1.5rem;
+    height: 2.5rem;
 }
 .card-location{
     color: #f5f5f5;
@@ -47,5 +47,5 @@
     font-weight: 100;
     text-align: left;
     padding-top: .5rem;
-    height: 1.5rem;
+    height: 2.5rem;
 }

@@ -37,12 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'bookings',
     'turf',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'oauth2_provider',
-    'booking',
     
     
 ]

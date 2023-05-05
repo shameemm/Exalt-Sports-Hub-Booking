@@ -50,7 +50,7 @@ function Head() {
   const logout = () => {
     localStorage.clear()
     setTokens(null)
-    if (window.location.pathname === '/partner-home') {
+    if (window.location.pathname === '/partner-home' || window.location.pathname === '/partner-bookings') {
       navigate('/partner_login')
     }
   }
@@ -100,7 +100,10 @@ function Head() {
                       { token ? (<span> <p onClick={()=>{
                         logout()
                         toast("Logged Out !")
-                      }}> Logout </p></span> ): (<span><p><Link className='link-head' to="/login">Login</Link></p></span>)}
+                      }}> Logout </p> <p onClick={()=>{
+                        logout()
+                        toast("Logged Out !")
+                      }}> Booking </p> </span> ): (<span><p><Link className='link-head' to="/login">Login</Link></p></span>)}
                       <p><Link className='link-head' to="/contact">Contact</Link></p>
                     </div>
                   }
@@ -117,10 +120,11 @@ function Head() {
                 <div className="links-flex">
                   <p><Link className='link-head' to="/">Home</Link></p>
                   <p><Link className='link-head' to="/partner_login">Partner</Link></p>
-                  {token ? <span><p onClick={()=>{
+                  {token ? <><span><p onClick={()=>{
                         toast("Logged Out !")
                         logout()
-                      }}> Logout </p></span> : <span><p><Link className='link-head' to="/login">Login</Link></p></span>}
+                      }}> Logout </p></span>
+                      <span><Link className='link-head' to="/user-bookings">Bookings</Link></span></> : <span><p><Link className='link-head' to="/login">Login</Link></p></span>}
                   <p><Link className='link-head' to="/contact">Contact</Link></p>
                 </div>}
             </Box>

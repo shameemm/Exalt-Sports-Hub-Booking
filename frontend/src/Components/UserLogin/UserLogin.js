@@ -124,7 +124,7 @@ function UserLogin() {
                     setRefresh(res.data.refresh)
                     setAccess(res.data.access)
                     setError(res.data.error)
-                    setTokens(res.data.refresh)
+                    setTokens(res.data)
                     navigate('/')
                     setLoading(false)
                 }

@@ -4,7 +4,9 @@ import jwt_decode from 'jwt-decode'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 
-let authTokens = localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):null
+
+let authTokens = localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):null 
+console.log(authTokens);
 
 export const unAuthInstance = axios.create({
     

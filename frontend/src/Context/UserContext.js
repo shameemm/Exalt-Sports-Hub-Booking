@@ -6,7 +6,7 @@ export const UserProvider = ({children})=>{
     const [tokens,setTokens] = useState()
     useEffect(() => {
         setTokens(()=>localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):null)
-    }, [tokens])
+    }, [])
     
 
     let contextData = {

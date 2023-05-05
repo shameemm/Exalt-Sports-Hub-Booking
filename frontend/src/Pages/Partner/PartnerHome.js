@@ -32,14 +32,19 @@ const token = JSON.parse(localStorage.getItem('token'))
 if( token!=null){
 const decode = jwt_decode(token.access)
 }
+else{
+  navigate('/partner_login')
+}
 useEffect(()=>{
    if (token != null){
   const decode = jwt_decode(token.access)
   if (decode.is_partner===false){
     navigate('/partner_login')
   }
+  
 }
 else{
+
   navigate('/partner_login')
 }
 }
@@ -53,7 +58,7 @@ useEffect(()=>{
       handleOpen()
     }
   },)
-},[open])
+},[])
   return (
     <div>
       <Head></Head>

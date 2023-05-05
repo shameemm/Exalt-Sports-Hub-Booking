@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import AdminNav from '../../Components/AdminNav/AdminNav'
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode'
+import AdminDashboard from '../../Components/AdminDashboard/AdminDashboard'
 import ApproveTurf from '../../Components/ApproveTurf/ApproveTurf';
 
 
@@ -28,7 +29,7 @@ function AdminHome() {
         <Grid container >
             <Grid md={2} style={{display:'flex'}}>
                 <AdminNav/>
-                Dashboard
+                <AdminDashboard></AdminDashboard>
             </Grid>
         </Grid>
     </div>

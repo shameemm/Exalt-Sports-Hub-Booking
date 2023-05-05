@@ -1,10 +1,11 @@
-import React, { useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from '../../axios'
+import axios,{unAuthInstance} from '../../axios'
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { TurfContext } from '../../Context/TurfContext';
 const ColorButton = styled(Button)(({ theme }) => ({
     width:'100%',
   color: theme.palette.getContrastText('#2B7754'),
@@ -17,14 +18,16 @@ const ColorButton = styled(Button)(({ theme }) => ({
 function ViewTurf() {
     const navigate = useNavigate()
     const [data,setData] = useState([])
+    const {turfData,setTurfData} = useContext(TurfContext)
     const [turfName, setTurfName] = useState()
     const {id} = useParams()
     console.log(id);
     useEffect(()=>{
-        axios.get(`turf/view-turf/${id}`).then((res)=>{
-            console.log(res.data);
-            setTurfName(res.data.turf.name)
-            setData(res.data)
+         unAuthInstance.get(`turf/view-turf/${id}`).then((res)=>{
+          setTurfData(res.data)
+          console.log(res.data);
+          setTurfName(res.data.turf.name)
+          setData(res.data)
         })
     },[])
     console.log("data",data);
